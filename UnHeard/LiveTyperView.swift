@@ -1,38 +1,25 @@
-//
-//  LiveTyperView.swift
-//  UnHeard
-//
-//  Created by Avya Rathod on 06/02/24.
-//
-
 import SwiftUI
 
 struct LiveTyperView: View {
     @StateObject private var recognizedTextViewModel = RecognizedTextViewModel()
-    @State private var isProcessing: Bool = true
-    @State private var isFrontCamera: Bool = false
+    @StateObject var modelState = ModelState()
+    @StateObject private var cameraState = CameraState()
+    @State private var isShowingModal = false
     
     var body: some View {
         ZStack {
-            // The live camera feed
-            LiveStreamView(isUsingFrontCamera: $isFrontCamera, recognizedTextViewModel: recognizedTextViewModel)
-            
-            // Bottom overlay container
+            LiveStreamView(recognizedTextViewModel: recognizedTextViewModel, modelState:modelState, cameraState:cameraState)
             
             VStack {
                 Spacer()
-                // Display the recognized text
                 Text(recognizedTextViewModel.recognizedText)
                     .font(.caption)
                     .foregroundColor(.gray)
                     .padding(.horizontal)
                 VStack(spacing: 2) {
-                    // Top row with camera switch and start/stop button
                     HStack {
-                        // Camera switch button
                         Button(action: {
-                            isFrontCamera.toggle()
-                            // Action to switch camera
+                            cameraState.isFrontCamera.toggle()
                         }) {
                             Image(systemName: "camera.rotate")
                                 .resizable()
@@ -45,15 +32,14 @@ struct LiveTyperView: View {
                         
                         Spacer()
                         
-                        // Start/stop button
                         Button(action: {
-                            isProcessing.toggle()
+                            modelState.isProcessing.toggle()
                         }) {
-                            Image(systemName: isProcessing ? "stop.fill" : "play.fill")
+                            Image(systemName: modelState.isProcessing ? "stop.fill" : "play.fill")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(isProcessing ? .red : .green)
+                                .foregroundColor(modelState.isProcessing ? .red : .green)
                                 .padding(20)
                         }
                     }
@@ -66,26 +52,49 @@ struct LiveTyperView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50, alignment: .leading)
                         .padding()
-                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                        .multilineTextAlignment(.leading)
                 }
                 .frame(maxWidth: .infinity)
                 .background(Color.black.opacity(0.5))
                 .cornerRadius(25)
                 .overlay(
                     RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.gray, lineWidth: 1)
+                        .stroke(Color.black.opacity(0.5), lineWidth: 1)
                 )
+            }.onTapGesture {
+                self.isShowingModal = true
             }
         }
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            // Start processing or setup your model
-        }
-    }
-}
-
-struct LiveTyperView_Previews: PreviewProvider {
-    static var previews: some View {
-        LiveTyperView()
+        .edgesIgnoringSafeArea(.top)
+        .sheet(isPresented: $isShowingModal) {
+            NavigationView{
+                VStack(alignment: .leading) {
+                    Text("Detected Letter: \(recognizedTextViewModel.recognizedText)")
+                        .foregroundStyle(Color.white)
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding()
+                    
+                    Text("Generated Text")
+                        .foregroundStyle(Color.white)
+                        .font(.headline)
+                        .padding([.leading, .top])
+                    
+                    Text(recognizedTextViewModel.typedText)
+                        .foregroundStyle(Color.white)
+                        .padding([.leading, .bottom, .trailing])
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                }
+                .navigationBarItems(
+                    leading: Button(action: {
+                        isShowingModal.toggle()
+                    }) {
+                        Image(systemName: "chevron.left")
+                    }
+                )
+            }
+            .presentationBackground(Color.black.opacity(0.9))
+                    }
     }
 }

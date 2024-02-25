@@ -1,33 +1,39 @@
-//
-//  QuizView.swift
-//  UnHeard
-//
-//  Created by Avya Rathod on 06/02/24.
-//
-
 import SwiftUI
 
 struct QuizView: View {
     @StateObject private var recognizedTextViewModel = RecognizedTextViewModel()
+    @StateObject private var cameraState = CameraState()
+    @StateObject var modelState = ModelState()
     
-    @State private var score: Int = 500
+    @State private var score: Int = 0
     @State private var currentLetter: String = "A"
-    @State private var timeRemaining: Int = 59
+    @State private var timeRemaining: Int = 30
     @State private var recognizedSign: String = "A"
     @State private var confidence: Double = 0.0
-    @State private var isFrontCamera: Bool = true
+    
+    @State private var isQuizActive = false
+    @State private var questionsAnswered: Int = 0
+    @State private var showQuizEndSheet: Bool = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    
+        
     var body: some View {
         ZStack {
-            // The live camera feed
-            LiveStreamView(isUsingFrontCamera: $isFrontCamera, recognizedTextViewModel: recognizedTextViewModel)
+            LiveStreamView(recognizedTextViewModel: recognizedTextViewModel, modelState:modelState, cameraState: cameraState)
+            
             VStack {
                 
                 HStack{
+                    HStack(spacing: 5) {
+                        ForEach(0..<3, id: \.self) { index in
+                            Circle()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(index < questionsAnswered ? Color.green.opacity(0.5) : Color.black.opacity(0.5))
+                        }
+                    }
+                    .padding()
                     Spacer()
                     Text("Score: \(score) pts")
                         .foregroundColor(.white)
@@ -39,7 +45,6 @@ struct QuizView: View {
                         .padding(.trailing, 20)
                 }
                 
-                // Prompt for current letter
                 VStack{
                     Text("Make the sign for:")
                         .foregroundColor(.white)
@@ -58,72 +63,186 @@ struct QuizView: View {
                 
                 Spacer()
                 
-                // Timer and recognized text
                 VStack {
                     Text("Time Left: \(timeRemaining)")
                         .onReceive(timer) { _ in
-                            if timeRemaining > 0 {
+                            if timeRemaining > 0, isQuizActive, !showQuizEndSheet {
                                 timeRemaining -= 1
                             }
                         }
                     
                     HStack(spacing: 38.0) {
-                        Image(systemName: "camera.rotate")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 35, height: 35)
-                            .padding()
-                            .foregroundColor(.white)
-                            .onTapGesture {
-                                isFrontCamera.toggle()
-                                // Action to switch camera
-                            }
+                        
+                        Button(action: {
+                            cameraState.isFrontCamera.toggle()
+                        }) {
+                            Image(systemName: "camera.rotate")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 35, height: 35)
+                                .padding()
+                                .foregroundColor(.white)
+                            
+                        }
                         
                         VStack(alignment: .leading) {
-                            Text("Recognized sign: \(recognizedSign)")
+                            Text("Recognized sign: \(recognizedTextViewModel.latestPrediction)")
                                 .font(.title2)
-                            Text("confidence: \(Int(confidence * 100))%")
+                            Text("confidence: \(Int(recognizedTextViewModel.latestConfidence * 100))%")
                         }
                         .foregroundColor(.white)
                         .padding()
                         
                         Spacer()
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 100)
+                    .frame(maxWidth: .infinity)
                     .background(Color.black.opacity(0.5))
                     .cornerRadius(25)
                     .overlay(
                         RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color.gray, lineWidth: 1)
+                            .stroke(Color.black.opacity(0.5), lineWidth: 1)
                     )
                 }
-                .offset(y:35)
+            }
+            
+            if !isQuizActive {
+                VStack(spacing: 20) {
+                    Text("Welcome to the Quiz!")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    
+                    Text("When you're ready, press Start to begin.")
+                        .foregroundColor(.white)
+                    
+                    Button("Start Quiz") {
+                        startQuiz()
+                    }
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.opacity(0.8))
+                .edgesIgnoringSafeArea(.all)
             }
         }
         .edgesIgnoringSafeArea(.horizontal)
         .onAppear {
             generateRandomLetter()
+            timeRemaining = 30
+            isQuizActive = false
+            modelState.isProcessing = isQuizActive
+            score = 0
+        }
+        .onReceive(recognizedTextViewModel.$latestPrediction) { prediction in
+            if timeRemaining > 0, prediction == currentLetter{
+                score += 100
+                questionsAnswered += 1
+                generateRandomLetter()
+                timeRemaining = 30
+                if questionsAnswered == 3 {
+                    showQuizEndSheet = true
+                    modelState.isProcessing = false
+                }
+            }
         }
         .onReceive(timer) { _ in
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            } else {
+            if timeRemaining == 0 {
                 generateRandomLetter()
-                timeRemaining = 59 // Reset the timer for the next letter
+                timeRemaining = 30
+                questionsAnswered += 1
+                if questionsAnswered == 3 {
+                    showQuizEndSheet = true
+                    modelState.isProcessing = false
+                }
             }
+        }
+        .onChange(of: isQuizActive) { isActive in
+            modelState.isProcessing = isActive
+        }
+        .onDisappear{
+            resetQuiz()
+        }
+        .sheet(isPresented: $showQuizEndSheet) {
+            QuizEndView(score: score, retryAction: reStartQuiz)
         }
     }
     
+    func startQuiz() {
+        isQuizActive = true
+        generateRandomLetter()
+        modelState.isProcessing = true
+        timeRemaining = 30
+        score = 0
+        questionsAnswered = 0
+        showQuizEndSheet = false
+    }
+    
+    func reStartQuiz() {
+        isQuizActive = false
+        generateRandomLetter()
+        modelState.isProcessing = false
+        timeRemaining = 30
+        score = 0
+        questionsAnswered = 0
+        showQuizEndSheet = false
+    }
+    
+    func resetQuiz() {
+        isQuizActive = false
+        score = 0
+        timeRemaining = 30
+        questionsAnswered = 0
+        modelState.isProcessing = false
+    }
+    
     func generateRandomLetter() {
-        // Randomly pick a letter from the alphabet
         let randomIndex = Int.random(in: 0..<alphabet.count)
         currentLetter = String(alphabet[alphabet.index(alphabet.startIndex, offsetBy: randomIndex)])
     }
 }
 
-
-struct QuizView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuizView()
+struct QuizEndView: View {
+    let score: Int
+    var retryAction: () -> Void
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Quiz Completed!")
+                .font(.largeTitle)
+                .foregroundColor(.blue)
+            Text("Your score: \(score)")
+                .font(.title)
+                .foregroundColor(.secondary)
+            
+            if score == 0{
+                Text("How about we give this another try")
+                    .font(.title)
+                    .foregroundColor(.secondary)
+            }else if score == 300 {
+                Text("Perfect Score!! Keep it up")
+                    .font(.title)
+                    .foregroundColor(.secondary)
+            }else{
+                Text("Good efforts, you can do better")
+                    .font(.title)
+                    .foregroundColor(.secondary)
+            }
+            
+            Button(action: retryAction) {
+                Text("Retry")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(10)
+            }
+        }
+        .padding()
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .padding()
     }
 }

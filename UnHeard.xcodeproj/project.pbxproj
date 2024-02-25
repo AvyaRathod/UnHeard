@@ -9,40 +9,28 @@
 /* Begin PBXBuildFile section */
 		415317552B6CD5EF00E02FF2 /* UnHeardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415317542B6CD5EF00E02FF2 /* UnHeardApp.swift */; };
 		415317592B6CD5F100E02FF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415317582B6CD5F100E02FF2 /* Assets.xcassets */; };
-		415317662B6CD62C00E02FF2 /* ExtractPoses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415317632B6CD62C00E02FF2 /* ExtractPoses.swift */; };
-		415317672B6CD62C00E02FF2 /* ExtractFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415317642B6CD62C00E02FF2 /* ExtractFrames.swift */; };
-		415317712B6E21D800E02FF2 /* ExtractKeyPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415317702B6E21D800E02FF2 /* ExtractKeyPoints.swift */; };
 		417C5AF62B714D2300534510 /* LiveStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AF52B714D2200534510 /* LiveStreamView.swift */; };
 		417C5AF82B71739200534510 /* CropHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AF72B71739200534510 /* CropHands.swift */; };
 		417C5AFA2B717BC300534510 /* LiveTyperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AF92B717BC300534510 /* LiveTyperView.swift */; };
 		417C5AFC2B729C4D00534510 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AFB2B729C4D00534510 /* QuizView.swift */; };
 		417C5AFE2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AFD2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel */; };
 		417C5B002B72CD3D00534510 /* RecognizedTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AFF2B72CD3D00534510 /* RecognizedTextViewModel.swift */; };
-		41A7FCE12B6EED0D005EBD02 /* ISL_data_frames in Resources */ = {isa = PBXBuildFile; fileRef = 41A7FCE02B6EED0D005EBD02 /* ISL_data_frames */; };
-		41A7FCE32B6EF5A0005EBD02 /* imageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7FCE22B6EF5A0005EBD02 /* imageLoader.swift */; };
+		419678022B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 419678012B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel */; };
 		41A7FCE52B6FB228005EBD02 /* AlphabetDictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */; };
-		41A7FCE72B6FB741005EBD02 /* LiveVideoFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7FCE62B6FB741005EBD02 /* LiveVideoFeedView.swift */; };
-		41F27B602B6E7E78005E4529 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415317562B6CD5EF00E02FF2 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		415317512B6CD5EF00E02FF2 /* UnHeard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnHeard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		415317542B6CD5EF00E02FF2 /* UnHeardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnHeardApp.swift; sourceTree = "<group>"; };
-		415317562B6CD5EF00E02FF2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		415317582B6CD5F100E02FF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		415317632B6CD62C00E02FF2 /* ExtractPoses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtractPoses.swift; sourceTree = "<group>"; };
-		415317642B6CD62C00E02FF2 /* ExtractFrames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtractFrames.swift; sourceTree = "<group>"; };
-		415317702B6E21D800E02FF2 /* ExtractKeyPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractKeyPoints.swift; sourceTree = "<group>"; };
 		417C5AF52B714D2200534510 /* LiveStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamView.swift; sourceTree = "<group>"; };
 		417C5AF72B71739200534510 /* CropHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropHands.swift; sourceTree = "<group>"; };
 		417C5AF92B717BC300534510 /* LiveTyperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTyperView.swift; sourceTree = "<group>"; };
 		417C5AFB2B729C4D00534510 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		417C5AFD2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AlphabetsImageClassifier.mlmodel; sourceTree = "<group>"; };
 		417C5AFF2B72CD3D00534510 /* RecognizedTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizedTextViewModel.swift; sourceTree = "<group>"; };
-		41A7FCE02B6EED0D005EBD02 /* ISL_data_frames */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ISL_data_frames; sourceTree = "<group>"; };
-		41A7FCE22B6EF5A0005EBD02 /* imageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageLoader.swift; sourceTree = "<group>"; };
+		419678012B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel"; sourceTree = "<group>"; };
 		41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetDictionaryView.swift; sourceTree = "<group>"; };
-		41A7FCE62B6FB741005EBD02 /* LiveVideoFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveVideoFeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +47,6 @@
 		415317482B6CD5EF00E02FF2 = {
 			isa = PBXGroup;
 			children = (
-				41A7FCE02B6EED0D005EBD02 /* ISL_data_frames */,
 				415317532B6CD5EF00E02FF2 /* UnHeard */,
 				415317522B6CD5EF00E02FF2 /* Products */,
 			);
@@ -83,24 +70,11 @@
 				417C5AF52B714D2200534510 /* LiveStreamView.swift */,
 				417C5AF72B71739200534510 /* CropHands.swift */,
 				41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */,
-				415317562B6CD5EF00E02FF2 /* ContentView.swift */,
 				415317582B6CD5F100E02FF2 /* Assets.xcassets */,
-				415317622B6CD62C00E02FF2 /* Util */,
-				41A7FCE62B6FB741005EBD02 /* LiveVideoFeedView.swift */,
 				417C5AFD2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel */,
+				419678012B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel */,
 			);
 			path = UnHeard;
-			sourceTree = "<group>";
-		};
-		415317622B6CD62C00E02FF2 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				415317632B6CD62C00E02FF2 /* ExtractPoses.swift */,
-				415317642B6CD62C00E02FF2 /* ExtractFrames.swift */,
-				415317702B6E21D800E02FF2 /* ExtractKeyPoints.swift */,
-				41A7FCE22B6EF5A0005EBD02 /* imageLoader.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,7 +136,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				415317592B6CD5F100E02FF2 /* Assets.xcassets in Resources */,
-				41A7FCE12B6EED0D005EBD02 /* ISL_data_frames in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,18 +146,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41A7FCE72B6FB741005EBD02 /* LiveVideoFeedView.swift in Sources */,
 				417C5AFE2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel in Sources */,
-				41A7FCE32B6EF5A0005EBD02 /* imageLoader.swift in Sources */,
-				415317712B6E21D800E02FF2 /* ExtractKeyPoints.swift in Sources */,
-				41F27B602B6E7E78005E4529 /* ContentView.swift in Sources */,
 				415317552B6CD5EF00E02FF2 /* UnHeardApp.swift in Sources */,
+				419678022B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel in Sources */,
 				417C5AFC2B729C4D00534510 /* QuizView.swift in Sources */,
-				415317662B6CD62C00E02FF2 /* ExtractPoses.swift in Sources */,
 				417C5AF82B71739200534510 /* CropHands.swift in Sources */,
 				417C5B002B72CD3D00534510 /* RecognizedTextViewModel.swift in Sources */,
 				417C5AFA2B717BC300534510 /* LiveTyperView.swift in Sources */,
-				415317672B6CD62C00E02FF2 /* ExtractFrames.swift in Sources */,
 				417C5AF62B714D2300534510 /* LiveStreamView.swift in Sources */,
 				41A7FCE52B6FB228005EBD02 /* AlphabetDictionaryView.swift in Sources */,
 			);
@@ -327,8 +295,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -357,8 +324,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

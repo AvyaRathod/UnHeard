@@ -1,20 +1,17 @@
-//
-//  RecognizedTextViewModel.swift
-//  UnHeard
-//
-//  Created by Avya Rathod on 07/02/24.
-//
-
 import Foundation
 
 class RecognizedTextViewModel: ObservableObject {
     @Published var recognizedText: String = ""
     @Published var typedText: String = ""
+    @Published var latestPrediction: String = ""
+    @Published var latestConfidence: Float = 0
+    
     private var lastRecognizedText: String = ""
     private var consecutiveCount: Int = 0
     
-    // Call this function whenever a new prediction is made
-    func updateRecognizedText(newText: String) {
+    func updateRecognizedText(newText: String, modelState: ModelState) {
+        guard modelState.isProcessing else { return }
+        
         if newText == lastRecognizedText {
             consecutiveCount += 1
         } else {
@@ -22,21 +19,19 @@ class RecognizedTextViewModel: ObservableObject {
             lastRecognizedText = newText
         }
         
-        // Update recognized text for display
         DispatchQueue.main.async {
             self.recognizedText = newText
         }
         
-        // If the same text has been recognized for 3 consecutive frames, append it
-        if consecutiveCount >= 3 {
+        if consecutiveCount >= 5 {
             appendToTypedText(text: newText)
-            consecutiveCount = 0 // Reset count after appending
+            consecutiveCount = 0
         }
     }
     
     private func appendToTypedText(text: String) {
         DispatchQueue.main.async {
-            self.typedText += text + " " // Append new text to typed text
+            self.typedText += text + " "
         }
     }
 }
