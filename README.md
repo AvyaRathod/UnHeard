@@ -1,6 +1,15 @@
 # UnHeard_1.0
 
-UnHeard_1.0 is a pioneering application dedicated to breaking down communication barriers through the power of Indian Sign Language (ISL). Developed with cutting-edge technology, UnHeard_1.0 facilitates seamless interaction for the deaf and hard-of-hearing community by translating ISL into text in real-time.
+This project was submitted for the Swift Student **Coding Challenge '24**
+
+## Tell us about the features and technologies you used. (prompt question)
+
+UnHeard is an Indian Sign Language(ISL) recognition app. In India, there is a significant disparity between ISL interpreters and speakers with a ratio of approximately 1:20,000, causing communication gaps. Unheard is made for ease of accessibility and to significantly enhance communication for the deaf and hard-of-hearing community. For simplicity, currently, it can only detect alphabets, allowing the user to form basic sentences.
+
+The app includes three features: a sign dictionary, a quiz, and a live typer. The dictionary serves as a comprehensive tool for learning and reviewing sign language gestures. Its visual aids aid in memory retention and skill enhancement. The quiz feature transforms learning into an interactive game, facilitating knowledge assessment, reinforcement, and progress tracking, particularly beneficial for students. Lastly, the Live Typer acts as an assistive communication tool, instantly translating hand gestures into text as users sign in front of the camera, thereby facilitating real-time communication.
+
+Developed with Swift, UnHeard leverages AVFoundation and CoreML for real-time video capture and sign classification. The UI, crafted with SwiftUI, presents a live feed with overlaid text and interactive controls, creating a seamless user experience. This app not only educates but also bridges the communication gap, harnessing technology to empower the ISL community.
+
 
 ## Features
 
