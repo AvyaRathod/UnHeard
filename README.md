@@ -1,6 +1,11 @@
 # UnHeard_1.0
 
 This project was submitted for the Swift Student **Coding Challenge '24**
+<details>
+<summary>Update</summary>
+<br>
+Sadly didn't win it however it was a good journey
+</details>
 
 ## Tell us about the features and technologies you used. (prompt question)
 
