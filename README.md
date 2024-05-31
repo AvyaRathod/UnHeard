@@ -7,6 +7,14 @@ This project was submitted for the Swift Student **Coding Challenge '24**
 Sadly didn't win it however it was a good journey
 </details>
 
+## Continuation
+
+The development of UnHeard has progressed significantly, and the latest version of the project can be found in the following repository:
+
+[UnHeard 2.0](https://github.com/AvyaRathod/UnHeard_2.0)
+
+This new repository includes additional features, improvements, and enhancements that build upon the groundwork laid in UnHeard 1.0.
+
 ## Tell us about the features and technologies you used. (prompt question)
 
 UnHeard is an Indian Sign Language(ISL) recognition app. In India, there is a significant disparity between ISL interpreters and speakers with a ratio of approximately 1:20,000, causing communication gaps. Unheard is made for ease of accessibility and to significantly enhance communication for the deaf and hard-of-hearing community. For simplicity, currently, it can only detect alphabets, allowing the user to form basic sentences.
